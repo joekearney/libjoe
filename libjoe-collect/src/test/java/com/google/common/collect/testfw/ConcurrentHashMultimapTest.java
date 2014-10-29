@@ -4,6 +4,7 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.util.Set;
+import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -55,14 +56,14 @@ public class ConcurrentHashMultimapTest {
 		multimap.put("a", 1);
 		multimap.remove("a", 1);
 		assertThat(multimap.size(), is(0));
-		assertThat(multimap.get("a"), is(setOf()));
+		assertThat(multimap.get("a"), is(Collections.<Integer>emptySet()));
 	}
 	@Test
 	public void testSingleAddRemoveAll() throws Exception {
 		multimap.put("a", 1);
 		multimap.removeAll("a");
 		assertThat(multimap.size(), is(0));
-		assertThat(multimap.get("a"), is(setOf()));
+		assertThat(multimap.get("a"), is(Collections.<Integer>emptySet()));
 	}
 	@Test
 	public void testAddModifiesEmptyView() throws Exception {
@@ -151,10 +152,13 @@ public class ConcurrentHashMultimapTest {
 		System.out.println(multimap.toString());
 	}
 
-	private static Set<Integer> setOf(int ... ints) {
-		return ImmutableSet.copyOf(Ints.asList(ints));
+	private static <T> Set<T> setOf() {
+		return ImmutableSet.<T>of();
 	}
-	private static <T> Set<T> setOf(T ... objs) {
+	private static Set<Integer> setOf(int ... ints) {
+                return ImmutableSet.copyOf(Ints.asList(ints));
+        }
+	private static Set<String> setOf(String ... objs) {
 		return ImmutableSet.copyOf(objs);
 	}
 }

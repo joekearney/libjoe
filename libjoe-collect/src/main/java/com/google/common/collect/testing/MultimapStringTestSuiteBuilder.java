@@ -12,9 +12,11 @@ public class MultimapStringTestSuiteBuilder<M extends Multimap<String, String>> 
 		withSampleGenerators("with one key", TestStringMultimapGenerator.createSamplesWithSameKeys());
 		return super.createTestSuite();
 	}
-	
+/*	
 	public static <M extends Multimap<String, String>> MultimapTestSuiteBuilder<String, String, M> using(
 			TestMultimapGenerator<String, String, M> generator) {
 		return new MultimapStringTestSuiteBuilder<M>().usingGenerator(generator);
 	}
+*/
 }
+
